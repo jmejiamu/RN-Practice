@@ -7,6 +7,7 @@ import {
   Button,
   FlatList,
 } from "react-native";
+import AddItem from "./src/components/AddItem";
 import ModalComponent from "./src/components/ModalComponent";
 import { themes } from "./src/constant/themes";
 import useTasks from "./src/hook/useTasks";
@@ -27,20 +28,11 @@ const App = () => {
 
   return (
     <View style={themes.container}>
-      <View style={styles.containerTask}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Add new task"
-          value={task}
-          onChangeText={(text) => onHandleInput(text)}
-        />
-        <Button
-          title="ADD"
-          color="red"
-          onPress={onHandleSubmit}
-          disabled={task.length === 0}
-        />
-      </View>
+      <AddItem
+        onHandleInput={onHandleInput}
+        onHandleSubmit={onHandleSubmit}
+        task={task}
+      />
       <FlatList
         ListHeaderComponent={ListHeaderComponent}
         data={tasks}
@@ -59,21 +51,6 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  containerTask: {
-    marginTop: 40,
-    paddingHorizontal: 25,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  textInput: {
-    borderColor: "red",
-    borderBottomWidth: 1,
-    width: "60%",
-    height: 40,
-    fontSize: 14,
-    color: "red",
-  },
   containerList: {
     marginHorizontal: 20,
   },
